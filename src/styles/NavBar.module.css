@@ -1,0 +1,16 @@
+/* 15 Navbar Component */
+/* 14 */
+.NavBar {
+  background: #ffffff;
+  border: 1px solid #dadadf;
+}
+
+/* 23 navbar.js add classname to links */
+/* 22 */
+.NavLink {
+  padding: 5px;
+}
+
+.Active i {
+  color: #2142b2;
+}
