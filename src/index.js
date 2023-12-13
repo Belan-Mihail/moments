@@ -4,13 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
+import { CurrentUserProvider } from "./context/CurrentUserContext";
 
 ReactDOM.render(
   <React.StrictMode>
     {/* 20 app.js */}
     {/* 19 and import */}
     <Router>
-      <App />
+      {/* 43 SiginForm.js */}
+      {/* 42 and import */}
+      <CurrentUserProvider>
+        <App />
+      </CurrentUserProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

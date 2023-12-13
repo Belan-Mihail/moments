@@ -5,27 +5,23 @@ import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
 import { Container } from "react-bootstrap";
 import { Route, Switch } from "react-router-dom";
+import "./api/axiosDefaults.js";
+import SignUpForm from "./pages/auth/SignUpForm.js";
+import SignInForm from "./pages/auth/SignInForm.js";
 
-// 3 remove header/ add test button and import
-// 4 create components folder in src and add NavBar and add here navbar component and go to it
-
+// 42 index.js
+// 41
 function App() {
+ 
+
   return (
-    // 12
     <div className={styles.App}>
       <NavBar />
-      {/* 19 index.js */}
-      {/* 18 npm install react-router-dom@5.3.0 */}
-      {/* 17 add main in app.module.css and styles.main */}
-      {/* 16 and import Container */}
-
       <Container className={styles.Main}>
-        {/* 21 navbar.js */}
-        {/* 20 and import */}
         <Switch>
           <Route exact path="/" render={() => <h1>Home page</h1>} />
-          <Route exact path="/signin" render={() => <h1>Sign in</h1>} />
-          <Route exact path="/signup" render={() => <h1>Sign up</h1>} />
+          <Route exact path="/signin" render={() => <SignInForm />} />
+          <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
