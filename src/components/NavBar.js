@@ -8,6 +8,7 @@ import { useCurrentUser } from "../context/CurrentUserContext";
 import Avatar from "./Avatar";
 import { useSetCurrentUser } from "../context/CurrentUserContext";
 import axios from "axios";
+import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 
 // create context folder in src and CurrentUserContext.js - 40
 // 39
@@ -20,6 +21,42 @@ const NavBar = () => {
   // 44
   const currentUser = useCurrentUser();
 
+  // clickable burger menu
+  // 51 and below
+  // const { expanded, setExpanded } = useState(false);
+  // 52 and below
+//   Let’s now handle the functionality  so that the burger menu collapses  
+// when we choose one of its options.
+    // const ref = useRef(null)
+
+    // 55 create PostCreateEditForm.module.css and Asset.module.css in styles
+    // 55 create posts folder in src/pages and PostCreateForm.js inside
+
+    // 54 refactoring 51-53/ create hooks folder and useClickOutsideToggle.js
+    // 54 comment all toggle navbar logic from this area (51-53)
+    // 54 add this logic to useClickOutsideToggle.js 
+    // 54 and import
+    const { expanded, setExpanded, ref } = useClickOutsideToggle();
+
+    // 53
+    // useEffect(() => {
+    //   const handleClickOutside = (event) => {
+//         // We’ll first  check the element has been assigned to it.  
+// We need this because its initial value is  set to null. And then we’ll check if the  
+// user has clicked away from the referenced button.  
+        // if (ref.current && !ref.current.contains(event.target)) {
+          // If they have, we’ll call setExpanded with  false, which will close our dropdown menu.
+      //     setExpanded(false);
+      //   }
+      // };
+  
+      // document.addEventListener("mouseup", handleClickOutside);
+      // Now, inside the return statement’s cleanup  function, we’ll remove this event listener  
+// so that we’re 100% sure we’re not  leaving any event listeners behind.  
+    //   return () => {
+    //     document.removeEventListener("mouseup", handleClickOutside);
+    //   };
+    // }, [ref]);
 
   // 50
   const setCurrentUser = useSetCurrentUser();
@@ -75,7 +112,7 @@ const NavBar = () => {
         to={`/profiles/${currentUser?.profile_id}`}
       >
         {/* src, text and height = props for avatar component */}
-        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+        <Avatar src={currentUser?.profile_image} text={currentUser?.username} height={40} />
       </NavLink>
     </>
   );
@@ -99,7 +136,11 @@ const NavBar = () => {
   );
 
   return (
-    <Navbar className={styles.NavBar} expand="md" fixed="top">
+    // 51 add expanded={expanded} and below
+    // Ok, now we have to specify whether we’d  like the burger menu to be expanded.  
+// We’ll do so by setting react  bootstrap Navbar expanded prop  
+// to the expanded value that is  coming from the useState hook.
+    <Navbar expanded={expanded} className={styles.NavBar} expand="md" fixed="top">
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
@@ -109,7 +150,13 @@ const NavBar = () => {
 
         {/* 47 */}
         {currentUser && addPostIcon}
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        {/* 51 onClick={() => setExpanded(!expanded)} */}
+        <Navbar.Toggle 
+        // 52
+        ref={ref}
+        onClick={() => setExpanded(!expanded)} 
+        aria-controls="basic-navbar-nav" 
+        />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-left">
             <NavLink
