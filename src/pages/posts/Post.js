@@ -35,6 +35,7 @@ const Post = (props) => {
   // username, and assign the returned boolean value to the is_owner variable.
   const is_owner = currentUser?.username === owner;
 
+  // 70 create posts.module.css 
 //   69 and below change onclick functions
 const handleLike = async () => {
     try {

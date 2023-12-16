@@ -10,18 +10,57 @@ import SignUpForm from "./pages/auth/SignUpForm.js";
 import SignInForm from "./pages/auth/SignInForm.js";
 import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
+import PostsPage from "./pages/posts/PostsPage.js";
+import { useCurrentUser } from "./context/CurrentUserContext";
 
 // 42 index.js
 // 41
 function App() {
- 
+  // 73 posts.js
+  //  72 and below
+  // But before we create these routes we’ll  need to know who the currentUser is
+  // so we can return the posts they liked,  and the ones by profiles they follow.
+  // So, let's set the currentUser value by calling and  auto-importing the useCurrentUser hook. We’ll need
+  // their profile_id, to know whose profile_id to  filter the posts by. In case the currentUser’s
+  // details are still being fetched in the  background, it will default to an empty string.
+  const currentUser = useCurrentUser();
+  const profile_id = currentUser?.profile_id || "";
 
   return (
     <div className={styles.App}>
       <NavBar />
       <Container className={styles.Main}>
         <Switch>
-          <Route exact path="/" render={() => <h1>Home page</h1>} />
+          {/* 72 before */}
+          {/* <Route exact path="/" render={() => <h1>Home page</h1>} /> */}
+          {/* 72  and below*/}
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <PostsPage message="No results found. Adjust the search keyword." />
+            )}
+          />
+          <Route
+            exact
+            path="/feed"
+            render={() => (
+              <PostsPage
+                message="No results found. Adjust the search keyword or follow a user."
+                filter={`owner__followed__owner__profile=${profile_id}&`}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/liked"
+            render={() => (
+              <PostsPage
+                message="No results found. Adjust the search keyword or like a post."
+                filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
+              />
+            )}
+          />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           {/* 57 create asset.js in components */}
