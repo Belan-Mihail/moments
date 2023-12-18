@@ -5,9 +5,10 @@ import React from "react";
 import styles from "../../styles/Post.module.css";
 import { useCurrentUser } from "../../context/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
+import { MoreDropdown } from "../../components/MoreDropdown";
 
 const Post = (props) => {
   //     Back in Post.js, we’ll destructure the props from our post results, passed from the parent component.
@@ -34,6 +35,27 @@ const Post = (props) => {
   //   And using that variable we’ll check if the owner of the post matches the currentUser’s
   // username, and assign the returned boolean value to the is_owner variable.
   const is_owner = currentUser?.username === owner;
+  // 80 create PostEditForm.js in posts
+  // 79 and below
+  const history = useHistory();
+
+//   Great! Now, we’ll define a  handleEdit arrow function  
+// that will redirect the post  owner to the url /posts/:id/edit.  
+// As you’ll remember, this id variable holds the  id of the specific post the user wants to edit.
+const handleEdit = () => {
+  history.push(`/posts/${id}/edit`);
+};
+
+const handleDelete = async () => {
+  try {
+    await axiosRes.delete(`/posts/${id}/`);
+    history.goBack();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// /79 and below
 
   // 70 create posts.module.css 
 //   69 and below change onclick functions
@@ -100,7 +122,15 @@ const handleLike = async () => {
             {/* Back in our div, under the span, we’ll check if the currently logged in user is the owner,
 and if the postPage prop exists, if so, then we know we want to display the edit and delete options for our user.
 For now we’ll just put three dots as a placeholder to check our logic works */}
-            {is_owner && postPage && "..."}
+            {/* before 79 */}
+            {/* {is_owner && postPage && "..."} */}
+            {/* after 79 */}
+            {is_owner && postPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
           </div>
         </Media>
       </Card.Body>

@@ -10,45 +10,55 @@ import appStyles from "../../App.module.css";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import Post from "./Post";
+// 84 and below
+import CommentCreateForm from "../comments/CommentCreateForm";
+import { useCurrentUser } from "../../context/CurrentUserContext";
+// /84
 
 function PostPage() {
-    // 66 create post.module.css in styles folder
+  // 66 create post.module.css in styles folder
   // 65 and import
-//   The way to access URL parameters  
-// using the react router library is to use and  auto-import the useParams hook and destructure  
-// it in place with the name of the parameter  that we set in the route, which was ‘id’.
+  //   The way to access URL parameters
+  // using the react router library is to use and  auto-import the useParams hook and destructure
+  // it in place with the name of the parameter  that we set in the route, which was ‘id’.
   const { id } = useParams();
-//   So, to make all the future logic compatible with  arrays of posts, we’ll set the initial value to an  
-// object that contains an empty array of results.  That way, we can always operate on the results  
-// array, regardless of whether we get a single  post object or an array of posts from the API.
+  //   So, to make all the future logic compatible with  arrays of posts, we’ll set the initial value to an
+  // object that contains an empty array of results.  That way, we can always operate on the results
+  // array, regardless of whether we get a single  post object or an array of posts from the API.
   const [post, setPost] = useState({ results: [] });
 
+  // 84 and below
+  const currentUser = useCurrentUser();
+  const profile_image = currentUser?.profile_image;
+  const [comments, setComments] = useState({ results: [] });
+  // /84
+
   useEffect(() => {
-    // to fetch the post on mount, I’ll  define the handleMount async function. 
+    // to fetch the post on mount, I’ll  define the handleMount async function.
     const handleMount = async () => {
-                // However, this time our code will  
-// be slightly different. Because eventually we’re  going to make two requests here.  One for a post,  
-// and another for its comments.
+      // However, this time our code will
+      // be slightly different. Because eventually we’re  going to make two requests here.  One for a post,
+      // and another for its comments.
       try {
-//         Here we are destructing the data property returned  from the API and renaming it to post, later
-// we’ll need to destructure a second property for our  comments data, which we’ll rename to comments.
-// This renaming of an object key will be new to  you and it is another nice destructuring feature,  
-// allowing us to give our  variable a more meaningful name.
+        //         Here we are destructing the data property returned  from the API and renaming it to post, later
+        // we’ll need to destructure a second property for our  comments data, which we’ll rename to comments.
+        // This renaming of an object key will be new to  you and it is another nice destructuring feature,
+        // allowing us to give our  variable a more meaningful name.
         const [{ data: post }] = await Promise.all([
           axiosReq.get(`/posts/${id}`),
         ]);
-        // Ok, we’ll use the setPost function to update the  results array in the state to contain that post.  
-// So that we can check it’s all working,  we’ll log the post to the console.
+        // Ok, we’ll use the setPost function to update the  results array in the state to contain that post.
+        // So that we can check it’s all working,  we’ll log the post to the console.
         setPost({ results: [post] });
         console.log(post);
       } catch (err) {
         console.log(err);
       }
     };
-// Now, let’s call our handleMount function and run this code every time the  post id in the url changes.
+    // Now, let’s call our handleMount function and run this code every time the  post id in the url changes.
     handleMount();
   }, [id]);
-// /65
+  // /65
 
   return (
     <Row className="h-100">
@@ -66,8 +76,21 @@ Notice that we don’t need to give our postPage prop a value here, simply apply
 it will be returned as true inside our Post component.*/}
         <Post {...post.results[0]} setPosts={setPost} postPage />
         {/* /68 */}
+        {/* before 84 */}
+        {/* <Container className={appStyles.Content}>Comments</Container> */}
+        {/* after 84 */}
         <Container className={appStyles.Content}>
-          Comments
+          {currentUser ? (
+            <CommentCreateForm
+              profile_id={currentUser.profile_id}
+              profileImage={profile_image}
+              post={id}
+              setPost={setPost}
+              setComments={setComments}
+            />
+          ) : comments.results.length ? (
+            "Comments"
+          ) : null}
         </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">

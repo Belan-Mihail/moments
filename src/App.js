@@ -12,6 +12,7 @@ import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
 import PostsPage from "./pages/posts/PostsPage.js";
 import { useCurrentUser } from "./context/CurrentUserContext";
+import PostEditForm from "./pages/posts/PostEditForm.js";
 
 // 42 index.js
 // 41
@@ -61,11 +62,15 @@ function App() {
               />
             )}
           />
+          {/* /72 */}
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           {/* 57 create asset.js in components */}
           {/* 56 and import */}
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
+          {/* 82  CommentCreateEditForm.module.css */}
+          {/* 81 */}
+          <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
           {/* 65 PostPage.js*/}
           {/* 64  and import */}
           {/* The colon means that id is a parameter  that can be passed through the url.  
