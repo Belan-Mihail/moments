@@ -10,10 +10,16 @@ import appStyles from "../../App.module.css";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import Post from "./Post";
+// 85 below
 // 84 and below
 import CommentCreateForm from "../comments/CommentCreateForm";
 import { useCurrentUser } from "../../context/CurrentUserContext";
+import Comment from "../comments/Comment";
+
 // /84
+import InfiniteScroll from "react-infinite-scroll-component";
+import Asset from "../../components/Asset";
+import { fetchMoreData } from "../../utils/utils";
 
 function PostPage() {
   // 66 create post.module.css in styles folder
@@ -44,13 +50,28 @@ function PostPage() {
         // we’ll need to destructure a second property for our  comments data, which we’ll rename to comments.
         // This renaming of an object key will be new to  you and it is another nice destructuring feature,
         // allowing us to give our  variable a more meaningful name.
-        const [{ data: post }] = await Promise.all([
-          axiosReq.get(`/posts/${id}`),
-        ]);
+        // before 85
+        // const [{ data: post }] = await Promise.all([
+        //   axiosReq.get(`/posts/${id}`),
+        // ]);
         // Ok, we’ll use the setPost function to update the  results array in the state to contain that post.
         // So that we can check it’s all working,  we’ll log the post to the console.
+        // before 85
+        // setPost({ results: [post] });
+        // console.log(post);
+
+        // after 85
+        // Now, we can destructure the data  from the 2nd API request up here
+        // next to the data we got about the post.  This time we’ll rename the data to comments.
+        const [{ data: post }, { data: comments }] = await Promise.all([
+          axiosReq.get(`/posts/${id}`),
+          // So inside the Promise.all() here, we’ll add the  axiosReq code to fetch comments for this post.
+          axiosReq.get(`/comments/?post=${id}`),
+        ]);
         setPost({ results: [post] });
-        console.log(post);
+        // Under setPost, we’ll call the setComments  function so that the state can be updated
+        // and comments can be displayed to our users.
+        setComments(comments);
       } catch (err) {
         console.log(err);
       }
@@ -88,9 +109,39 @@ it will be returned as true inside our Post component.*/}
               setPost={setPost}
               setComments={setComments}
             />
-          ) : comments.results.length ? (
+          ) : // 86 create Comment.module.css
+          // before 85
+          // ) : comments.results.length ? (
+          //   "Comments"
+          // ) : null}
+          // after 85 and import import Comment from "../comments/Comment";
+          comments.results.length ? (
             "Comments"
           ) : null}
+          {comments.results.length ? (
+            // 90 (before without children={} and infinitescroll props)
+            <InfiniteScroll
+            children={comments.results.map((comment) => (
+              // We’ll also spread the comment  object so that its contents are passed as props.
+              <Comment
+                key={comment.id}
+                {...comment}
+                setPost={setPost}
+                setComments={setComments}
+              />
+            ))}
+            dataLength={comments.results.length}
+            loader={<Asset spinner />}
+            hasMore={!!comments.next}
+            next={() => fetchMoreData(comments, setComments)}
+
+            />
+          ) : currentUser ? (
+            <span>No comments yet, be the first to comment!</span>
+          ) : (
+            <span>No comments... yet</span>
+          )}
+          {/* /85 */}
         </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
