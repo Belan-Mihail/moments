@@ -106,7 +106,11 @@ function PostsPage({ message, filter = "" }) {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles mobile</p>
+        {/* 94 PopularProfile */}
+        {/* before 93 */}
+        {/* <p>Popular profiles mobile</p> */}
+        {/* after 93 */}
+        <PopularProfiles mobile />
         {/* 74 */}
         <i className={`fas fa-search ${styles.SearchIcon}`} />
         <Form
@@ -184,6 +188,7 @@ If  it doesn’t we’ll show our no results message. 102*/}
         )}
       </Col>
       <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
+        {/* 93 up */}
         {/* before 92 */}
         {/* <p>Popular profiles for desktop</p> */}
         {/* after 92 */}

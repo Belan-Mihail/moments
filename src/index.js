@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { CurrentUserProvider } from "./context/CurrentUserContext";
+import { ProfileDataProvider } from "./context/ProfileDataContext"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,7 +15,11 @@ ReactDOM.render(
       {/* 43 SiginForm.js */}
       {/* 42 and import */}
       <CurrentUserProvider>
-        <App />
+        {/* 98 PopularProfiles */}
+        {/* 97 ProfileDataProvider */}
+        <ProfileDataProvider>
+          <App />
+        </ProfileDataProvider>
       </CurrentUserProvider>
     </Router>
   </React.StrictMode>,
