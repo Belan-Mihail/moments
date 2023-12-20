@@ -17,6 +17,7 @@ import Asset from "../../components/Asset";
 import NoResults from "../../assets/no-results.png";
 import { fetchMoreData } from "../../utils/utils";
 import InfiniteScroll from "react-infinite-scroll-component";
+import PopularProfiles from "../profiles/PopularProfiles";
 
 // 71
 // function PostsPage() {
@@ -183,7 +184,10 @@ If  it doesn’t we’ll show our no results message. 102*/}
         )}
       </Col>
       <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-        <p>Popular profiles for desktop</p>
+        {/* before 92 */}
+        {/* <p>Popular profiles for desktop</p> */}
+        {/* after 92 */}
+        <PopularProfiles />
       </Col>
     </Row>
   );

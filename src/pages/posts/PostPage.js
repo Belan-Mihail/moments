@@ -119,6 +119,7 @@ it will be returned as true inside our Post component.*/}
             "Comments"
           ) : null}
           {comments.results.length ? (
+            // 91 create profiles folder in src/pages and PopularProfiles.js
             // 90 (before without children={} and infinitescroll props)
             <InfiniteScroll
             children={comments.results.map((comment) => (
