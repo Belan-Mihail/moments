@@ -16,7 +16,7 @@ ReactDOM.render(
       {/* 42 and import */}
       <CurrentUserProvider>
         {/* 98 PopularProfiles */}
-        {/* 97 ProfileDataProvider */}
+        {/* 98 ProfileDataProvider */}
         <ProfileDataProvider>
           <App />
         </ProfileDataProvider>

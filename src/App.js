@@ -13,6 +13,7 @@ import PostPage from "./pages/posts/PostPage";
 import PostsPage from "./pages/posts/PostsPage.js";
 import { useCurrentUser } from "./context/CurrentUserContext";
 import PostEditForm from "./pages/posts/PostEditForm.js";
+import ProfilePage from "./pages/profiles/ProfilePage.js";
 
 // 42 index.js
 // 41
@@ -77,6 +78,9 @@ function App() {
 In this case, it will be the id of our  post. So any time we set a link to /post/  
 and then add a post id React will know to  render the Post page for the specified post. */}
           <Route exact path="/posts/:id" render={() => <PostPage />} />
+          {/* 100 */}
+          <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+          {/* /100 */}
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
