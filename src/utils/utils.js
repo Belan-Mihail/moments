@@ -56,3 +56,48 @@ export const fetchMoreData = async (resource, setResource) => {
 // already exists in our previous results. If the some() method finds a match,  
 // we’ll just return the existing accumulator to the  reduce method. But if it doesn’t find a match,  
 // we know this is a new post, so we can return our  spread accumulator with the new post at the end.
+
+// 105 profiledatacontext
+// 104
+
+export const followHelper = (profile, clickedProfile, following_id) => {
+//   In the first part, we’ll check if the profile in the array we’re iterating over is the
+// same one the user just clicked on.
+  return profile.id === clickedProfile.id
+    ? // This is the profile I clicked on,
+      // update its followers count and set its following id
+      {
+//         So if their id’s are the same, we’ll return the profile object, increasing its followers_count
+// by one and setting its following_id to data.id.
+        ...profile,
+        followers_count: profile.followers_count + 1,
+        following_id,
+      }
+//       In the second part, we’ll check if the profile in the array we’re iterating over is owned
+// by the currently logged in user.
+    : profile.is_owner
+    ? // This is the profile of the logged in user
+      // update its following count
+//       If so, we’ll have to increase that profile’s following_count by one, because the currently
+// logged in user just followed a profile.
+      { ...profile, following_count: profile.following_count + 1 }
+    : // this is not the profile the user clicked on or the profile
+      // the user owns, so just return it unchanged
+      // Finally, in the last part of our ternary, we’ll return the profile without changing it,
+// as we don’t have to update any of its attributes or stats.
+      profile;
+};
+
+// 107 profilepage
+// 106
+export const unfollowHelper = (profile, clickedProfile) => {
+  return profile.id === clickedProfile.id
+    ? {
+        ...profile,
+        followers_count: profile.followers_count - 1,
+        following_id: null,
+      }
+    : profile.is_owner
+    ? { ...profile, following_count: profile.following_count - 1 }
+    : profile;
+}

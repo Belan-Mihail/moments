@@ -19,8 +19,12 @@ import { Image } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import Alert from "react-bootstrap/Alert";
+import { useRedirect } from "../../hooks/useRedirect";
 
 function PostCreateForm() {
+// 119
+useRedirect("loggedOut");
+// /119
   const [errors, setErrors] = useState({});
 
   //   60 and below

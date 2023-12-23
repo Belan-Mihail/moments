@@ -8,7 +8,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import { Button, Image } from "react-bootstrap";
 import Asset from "../../components/Asset";
-
+import NoResults from "../../assets/no-results.png";
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -17,55 +17,72 @@ import { axiosReq } from "../../api/axiosDefaults";
 import PopularProfiles from "./PopularProfiles";
 import { useCurrentUser } from "../../context/CurrentUserContext";
 import {
-    useProfileData,
-    useSetProfileData,
-  } from "../../context/ProfileDataContext";
+  useProfileData,
+  useSetProfileData,
+} from "../../context/ProfileDataContext";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
+import Post from "../posts/Post";
+import { ProfileEditDropdown } from "../../components/MoreDropdown";
+
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
   const { id } = useParams();
-  const setProfileData = useSetProfileData();
-//   Now that we’ve written our API request, let’s start rendering our data in the browser. To access
-// the pageProfile data, we’ll destructure it when we call and auto-import the useProfileData hook.
-const { pageProfile } = useProfileData();
-// Let’s also destructure the single profile object from the results array.
-const [profile] = pageProfile.results;
-const is_owner = currentUser?.username === profile?.owner;
-
-
+  // 103 Profile
+  // 102
+  // const setProfileData = useSetProfileData();
+  // after 102
+  // 108 profile.js
+  // 107 add handleUnfollow and below
+  const {setProfileData, handleFollow, handleUnfollow} = useSetProfileData();
+  //   Now that we’ve written our API request, let’s start rendering our data in the browser. To access
+  // the pageProfile data, we’ll destructure it when we call and auto-import the useProfileData hook.
+  const { pageProfile } = useProfileData();
+  // Let’s also destructure the single profile object from the results array.
+  const [profile] = pageProfile.results;
+  const is_owner = currentUser?.username === profile?.owner;
+  const [profilePosts, setProfilePosts] = useState({ results: [] });
 
   useEffect(() => {
     const fetchData = async () => {
-        try {
-//             Inside the try-block, we'll destructure the data returned and rename it to page profile.
-// We'll use promise.all again just like we did back in the code for post page.
-// There, we fetched the post and its comments. Here, we’ll be fetching the user profile and their posts
-// in a later unit. So, in the array we’ll make the request to the /profiles/:id/ endpoint with the
-// auto-imported axiosReq instance.
-          const [{ data: pageProfile }] = await Promise.all([
+      try {
+        //             Inside the try-block, we'll destructure the data returned and rename it to page profile.
+        // We'll use promise.all again just like we did back in the code for post page.
+        // There, we fetched the post and its comments. Here, we’ll be fetching the user profile and their posts
+        // in a later unit. So, in the array we’ll make the request to the /profiles/:id/ endpoint with the
+        // auto-imported axiosReq instance.
+        const [{ data: pageProfile }, { data: profilePosts }] =
+          await Promise.all([
             axiosReq.get(`/profiles/${id}/`),
+            axiosReq.get(`/posts/?owner__profile=${id}`),
           ]);
         //   If everything goes well, we’ll need to update the pageProfile data.
-// To access it, we’ll define the setProfileData function by
-// auto-importing the useSetProfileData hook that we built in the last unit.
-          setProfileData((prevState) => ({
-            ...prevState,
-            pageProfile: { results: [pageProfile] },
-          }));
-          setHasLoaded(true);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      fetchData();
-    }, [id, setProfileData]);
+        // To access it, we’ll define the setProfileData function by
+        // auto-importing the useSetProfileData hook that we built in the last unit.
+        setProfileData((prevState) => ({
+          ...prevState,
+          pageProfile: { results: [pageProfile] },
+        }));
+        setProfilePosts(profilePosts);
+        setHasLoaded(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [id, setProfileData]);
 
   const mainProfile = (
     <>
+    {/* 112 create  UsernameForm.js in profiles */}
+    {/* 111 */}
+    {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
+    {/* /111 */}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
-        <Image
+          <Image
             className={styles.ProfileImage}
             roundedCircle
             src={profile?.image}
@@ -94,14 +111,18 @@ const is_owner = currentUser?.username === profile?.owner;
             (profile?.following_id ? (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-                onClick={() => {}}
+                // Let’s now go to the follow button and call the handleFollow function with the profile in the onClick attribute.
+                // 107 before =>  empty function => onClick={() => {}} 
+                onClick={() => handleUnfollow(profile)}
               >
                 unfollow
               </Button>
             ) : (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.Black}`}
-                onClick={() => {}}
+                // // Let’s now go to the follow button and call the handleFollow function with the profile in the onClick attribute.
+                // 102 before =>  empty function => onClick={() => {}} 
+                onClick={() => handleFollow(profile)}
               >
                 follow
               </Button>
@@ -115,8 +136,24 @@ const is_owner = currentUser?.username === profile?.owner;
   const mainProfilePosts = (
     <>
       <hr />
-      <p className="text-center">Profile owner's posts</p>
+      <p className="text-center">{profile?.owner}'s posts</p>
       <hr />
+      {profilePosts.results.length ? (
+        <InfiniteScroll
+          children={profilePosts.results.map((post) => (
+            <Post key={post.id} {...post} setPosts={setProfilePosts} />
+          ))}
+          dataLength={profilePosts.results.length}
+          loader={<Asset spinner />}
+          hasMore={!!profilePosts.next}
+          next={() => fetchMoreData(profilePosts, setProfilePosts)}
+        />
+      ) : (
+        <Asset
+          src={NoResults}
+          message={`No results found, ${profile?.owner} hasn't posted yet.`}
+        />
+      )}
     </>
   );
 

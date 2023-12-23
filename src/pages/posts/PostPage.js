@@ -20,6 +20,7 @@ import Comment from "../comments/Comment";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Asset from "../../components/Asset";
 import { fetchMoreData } from "../../utils/utils";
+import PopularProfiles from "../profiles/PopularProfiles";
 
 function PostPage() {
   // 66 create post.module.css in styles folder
@@ -84,7 +85,11 @@ function PostPage() {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles for mobile</p>
+        {/* 110 MoreDropdown.js*/}
+        {/* before 109 */}
+        {/* <p>Popular profiles for mobile</p> */}
+        {/* after 109 */}
+        <PopularProfiles mobile />
         {/* 69 post.js */}
         {/* 68 change placholder text to <Post /> */}
         {/* <p>Post component</p> */}
@@ -146,7 +151,10 @@ it will be returned as true inside our Post component.*/}
         </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        Popular profiles for desktop
+        {/* before 109 */}
+        {/* <p>Popular profiles for desktop</p> */}
+        {/* after 109 */}
+        <PopularProfiles  />
       </Col>
     </Row>
   );

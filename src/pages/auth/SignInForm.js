@@ -20,6 +20,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { useSetCurrentUser } from "../../context/CurrentUserContext";
+import { useRedirect } from "../../hooks/useRedirect";
 
 
 const SignInForm = () => {
@@ -31,6 +32,13 @@ const SignInForm = () => {
 //   We called our custom useSetCurrentUser  hook in SignInForm to be able to update  
 // the current user data on successful login.
   const setCurrentUser = useSetCurrentUser();
+  // 118 signupform
+  // 117 and below
+  // So, in the SignInForm component, we’ll auto-import our useRedirect
+// hook at the top of our component code. And pass it the “loggedIn” string,
+// as we want to redirect our users away from this page if they are already logged in.
+  useRedirect("loggedIn");
+  // /117
 
   const [signInData, setSignInData] = useState({
     username: "",
@@ -68,7 +76,10 @@ const SignInForm = () => {
     try {
       const {data} = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
-      history.push("/");
+      // before 117
+      // history.push("/");
+      // after 117
+      history.goBack();
     } catch (err) {
       setErrors(err.response?.data);
     }

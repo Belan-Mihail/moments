@@ -8,6 +8,7 @@ import { useCurrentUser } from "../../context/CurrentUserContext";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { Button } from "react-bootstrap";
+import { useSetProfileData } from "../../context/ProfileDataContext";
 
 const Profile = (props) => {
   // Then  we’ll destructure the profile and mobile props,
@@ -20,6 +21,15 @@ const Profile = (props) => {
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
+
+  // 104 utils.js
+  // // 103
+  // let’s go to the Profile.js file so that we can add our handleFollow function to our follow button there, too.
+// To access that, we’ll auto-import and call the useSetProfileData hook and destructure the handleFollow function.
+  // 109 PostPage
+// 108 handleUnfollow and below
+  const { handleFollow, handleUnfollow } = useSetProfileData()
+  // /103
 
   return (
     <div
@@ -56,14 +66,20 @@ we’ve combined them in our conditional logic.  So if you’re finding this cod
         {!mobile && currentUser && !is_owner && (following_id ? (
             <Button
               className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-              onClick={() => {}}
+              // before 108
+              // onClick={() => {}}
+              // after 108
+              onClick={() => handleUnfollow(profile)}
             >
               unfollow
             </Button>
           ) : (
             <Button
               className={`${btnStyles.Button} ${btnStyles.Black}`}
-              onClick={() => {}}
+              // before 103
+              // onClick={() => {}}
+              // after 103
+              onClick={() => handleFollow(profile)}
             >
               follow
             </Button>
