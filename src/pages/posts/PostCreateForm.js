@@ -22,6 +22,8 @@ import Alert from "react-bootstrap/Alert";
 import { useRedirect } from "../../hooks/useRedirect";
 
 function PostCreateForm() {
+  // create mocks folder in src and handlers.js
+// 120 npm install msw --save-dev
 // 119
 useRedirect("loggedOut");
 // /119

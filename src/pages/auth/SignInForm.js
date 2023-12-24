@@ -21,6 +21,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useSetCurrentUser } from "../../context/CurrentUserContext";
 import { useRedirect } from "../../hooks/useRedirect";
+import { setTokenTimestamp } from "../../utils/utils";
 
 
 const SignInForm = () => {
@@ -76,6 +77,14 @@ const SignInForm = () => {
     try {
       const {data} = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
+      // 127 currentusercontext
+      // 126
+      setTokenTimestamp(data);
+//       In the handleSubmit function, we’ll auto-import the setTokenTimestamp function
+// and call it with the data object returned by the API on successful sign in.
+// Now this function should extract the expiry date from the access token
+// and save it to the user's browser in local storage.
+      // /126
       // before 117
       // history.push("/");
       // after 117

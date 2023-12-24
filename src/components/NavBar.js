@@ -9,6 +9,7 @@ import Avatar from "./Avatar";
 import { useSetCurrentUser } from "../context/CurrentUserContext";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+import { removeTokenTimestamp } from "../utils/utils";
 
 // create context folder in src and CurrentUserContext.js - 40
 // 39
@@ -66,6 +67,10 @@ const NavBar = () => {
     try {
       await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
+      // 129 npm audit fix
+      // 128
+      removeTokenTimestamp();
+      // /128
     } catch (err) {
       console.log(err);
     }
