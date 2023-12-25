@@ -67,6 +67,7 @@ const NavBar = () => {
     try {
       await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
+      // 130 create NotFound.module.css and NotFound.js in components
       // 129 npm audit fix
       // 128
       removeTokenTimestamp();

@@ -18,6 +18,7 @@ import NoResults from "../../assets/no-results.png";
 import { fetchMoreData } from "../../utils/utils";
 import InfiniteScroll from "react-infinite-scroll-component";
 import PopularProfiles from "../profiles/PopularProfiles";
+import { useCurrentUser } from "../../context/CurrentUserContext";
 
 // 71
 // function PostsPage() {
@@ -39,6 +40,11 @@ import PopularProfiles from "../profiles/PopularProfiles";
 
 // 73
 function PostsPage({ message, filter = "" }) {
+  // 133 create Procfile 
+  // 132 and below
+  const currentUser = useCurrentUser();
+  // /132
+
   // We’ll need to store posts in an object, inside  a results array that will originally be empty,
   // just like we did in the PostPage component.
   const [posts, setPosts] = useState({ results: [] });
@@ -101,7 +107,9 @@ function PostsPage({ message, filter = "" }) {
     // before 74
     // }, [filter, pathname]);
     // after 74
-  }, [filter, query, pathname]);
+  // }, [filter, query, pathname]);
+  // after 132
+  }, [filter, query, pathname, currentUser]);
 
   return (
     <Row className="h-100">

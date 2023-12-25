@@ -17,6 +17,7 @@ import ProfilePage from "./pages/profiles/ProfilePage.js";
 import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
+import NotFound from "./components/NotFound.js";
 
 // 42 index.js
 // 41
@@ -103,7 +104,11 @@ and then add a post id React will know to  render the Post page for the specifie
             render={() => <ProfileEditForm />}
           />
           {/* /115 */}
-          <Route render={() => <p>Page not found!</p>} />
+          {/* 132 PostsPage.js */}
+          {/* before 131 */}
+          {/* <Route render={() => <p>Page not found!</p>} /> */}
+          {/* after 131 */}
+          <Route render={() => <NotFound />} />
         </Switch>
       </Container>
     </div>
