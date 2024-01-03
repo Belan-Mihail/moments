@@ -7,8 +7,10 @@ import Asset from "../../components/Asset";
 import { useProfileData } from "../../context/ProfileDataContext";
 import Profile from "./Profile";
 
+
 const PopularProfiles = ({ mobile }) => {
   const { popularProfiles } = useProfileData();
+
 
   return (
     // before 94
@@ -51,6 +53,7 @@ we’re mapping over popularProfiles and check  for the mobile prop again. If it
               // <p key={profile.id}>{profile.owner}</p>
               // after 96 without mobile prop
               <Profile key={profile.id} profile={profile} />
+              
             ))
           )}
         </>

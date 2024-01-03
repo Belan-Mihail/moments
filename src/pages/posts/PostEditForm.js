@@ -164,12 +164,12 @@ function PostEditForm() {
       ))}
 
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        className={`${btnStyles.Button} ${btnStyles.Main}`}
         onClick={() => history.goBack()}
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Main}`} type="submit">
         update
       </Button>
     </div>
@@ -191,7 +191,7 @@ function PostEditForm() {
               </figure>
               <div>
                 <Form.Label
-                  className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                  className={`${btnStyles.Button} ${btnStyles.Main} btn`}
                   htmlFor="image-upload"
                 >
                   Change the image

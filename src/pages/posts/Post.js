@@ -10,6 +10,8 @@ import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
 
+
+
 const Post = (props) => {
   //     Back in Post.js, we’ll destructure the props from our post results, passed from the parent component.
   // Our post component will behave differently depending on if the currentUser is the owner of the post or not.
@@ -27,7 +29,10 @@ const Post = (props) => {
     updated_at,
     postPage,
     setPosts,
+    profile_content,
   } = props;
+
+  
 
   //   So we’ll define a currentUser variable using the useCurrentUser hook exported from the
   // currentUserContexts file.
@@ -38,7 +43,9 @@ const Post = (props) => {
   // 80 create PostEditForm.js in posts
   // 79 and below
   const history = useHistory();
+  // const profile_content = currentUser?.profile_content
 
+  
 //   Great! Now, we’ll define a  handleEdit arrow function  
 // that will redirect the post  owner to the url /posts/:id/edit.  
 // As you’ll remember, this id variable holds the  id of the specific post the user wants to edit.
@@ -107,14 +114,19 @@ const handleLike = async () => {
     }
   };
 
+
+  
+
 // /69
 
   return (
+    
     <Card className={styles.Post}>
       <Card.Body>
         <Media className="align-items-center justify-content-between">
           <Link to={`/profiles/${profile_id}`}>
-            <Avatar src={profile_image} height={55} />
+            {/* <Avatar src={profile_image} height={55} /> */}
+            <Avatar src={profile_image} height={55} content={profile_content}/>
             {owner}
           </Link>
           <div className="d-flex align-items-center">

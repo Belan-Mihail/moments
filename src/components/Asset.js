@@ -14,7 +14,7 @@ const Asset = ({ spinner, src, message }) => {
 // For example, if we don’t pass a spinner  prop, it’s value will be undefined,  
 // and so the spinner component won’t be rendered.
     <div className={`${styles.Asset} p-4`}>
-      {spinner && <Spinner animation="border" />}
+      {spinner && <Spinner animation="border" className={styles.Spinner} />}
       {src && <img src={src} alt={message} />}
       {message && <p className="mt-4">{message}</p>}
     </div>

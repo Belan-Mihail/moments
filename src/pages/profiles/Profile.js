@@ -10,14 +10,16 @@ import Avatar from "../../components/Avatar";
 import { Button } from "react-bootstrap";
 import { useSetProfileData } from "../../context/ProfileDataContext";
 
+
 const Profile = (props) => {
+  
   // Then  we’ll destructure the profile and mobile props,
   // we’ll also add a new variable of imageSize which  we’ll use for the profile picture in the Avatar.
   // And we’ll give this variable  a default value of 55.
   const { profile, mobile, imageSize = 55 } = props;
   // Next we need to access the data within the profile  object, so we’ll destructure the id, following_id,
   // image and owner variables from it.
-  const { id, following_id, image, owner } = profile;
+  const { id, following_id, image, owner, content } = profile;
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
@@ -35,13 +37,13 @@ const Profile = (props) => {
     <div
       className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}
     >
-      <div>
+      
         {/* And we’ll set its  
 “to” prop to link to the user’s profile page by  including the profile id in the template string */}
         <Link className="align-self-center" to={`/profiles/${id}`}>
-          <Avatar src={image} height={imageSize} />
+          <Avatar src={image} height={imageSize} content={content} />
         </Link>
-      </div>
+      
       <div className={`mx-2 ${styles.WordBreak}`}>
         <strong>{owner}</strong>
       </div>
@@ -65,7 +67,7 @@ We’ve worked with logical operators in JSX,  and ternarys before, but this is 
 we’ve combined them in our conditional logic.  So if you’re finding this code confusing we’d   */}
         {!mobile && currentUser && !is_owner && (following_id ? (
             <Button
-              className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
+              className={`${btnStyles.Button} ${btnStyles.Unfollow}`}
               // before 108
               // onClick={() => {}}
               // after 108
@@ -75,7 +77,7 @@ we’ve combined them in our conditional logic.  So if you’re finding this cod
             </Button>
           ) : (
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Black}`}
+              className={`${btnStyles.Button} ${btnStyles.Follow}`}
               // before 103
               // onClick={() => {}}
               // after 103

@@ -3,13 +3,15 @@
 
 .Button {
   font-size: 0.8rem;
+  font-weight: 700;
   align-self: center;
-  border-radius: 100px;
+  /* border-radius: 100px; */
   border-color: transparent;
   padding: 4px 10px;
   margin-left: 2px;
   margin-right: 2px;
   min-width: 75px;
+  color: #fff;
 }
 
 .Button:hover {
@@ -18,36 +20,128 @@
   cursor: pointer;
 }
 
+.Main {
+  background: #02be3a;
+  
+}
+
+.SignButton {
+  background: #079531;
+}
+
+
+.Main:hover, 
+.Main:hover:active, 
+.Main:active,
+.Main:focus,
+.SignButton:hover, 
+.SignButton:hover:active, 
+.SignButton:active,
+.SignButton:focus
+ {
+  background: #f78215 !important;;
+  color: #fff;
+}
+
+.CommentButton {
+  background: #f78215;
+}
+
+
+
+.CommentButton:hover, 
+.CommentButton:hover:active, 
+.CommentButton:active {
+  opacity: .8;
+  color: #fff;
+}
+
+.SaveButton {
+    background: #02be3a;
+    
+}
+
+.SaveButton:hover, 
+.SaveButton:hover:active, 
+.SaveButton:active, 
+.SaveButton:focus {
+    background: #079531 !important;
+  }
+
+  .Follow {
+    background: #8224e5;
+    
+}
+
+.Follow:hover, 
+.Follow:hover:active, 
+.Follow:active, 
+.Follow:focus {
+  background: #8224e5 !important;
+    border: 2px solid #f78215;
+  }
+
+  .Unfollow {
+    background: #f78215;
+    
+    
+}
+
+.Unfollow:hover, 
+.Unfollow:hover:active, 
+.Unfollow:active, 
+.Unfollow:focus {
+  background: #f78215 !important;
+  border: 2px solid #8224e5;
+  }
+
+/* .Main:active, .Main:focus {
+  border-color: inherit;
+  box-shadow: inherit;
+} */
+
+
+
+/* #8224e5 - v
+#f78215 - orange*/
+/* #00fa4b - green */
+
+
+
+
+
 .Button:hover:active {
-  background-color: #2142b2 !important;
+  scale: 1.05;
+  
 }
 
 .Button:active {
-  background-color: #2142b2 !important;
+  scale: 1.05;
+  
 }
 
-.Button:focus {
-  background-color: #2142b2;
-}
+/* .Button:focus {
+  opacity: .9;
+} */
 
 .Wide {
   padding: 10px 50px;
   width: 100%;
 }
 
-.Blue,
+/* .Blue,
 .BlueOutline:hover,
 .Bright:hover {
   background-color: #2142b2;
   color: #ffffff;
-}
+} */
 
-.BlueOutline,
+/* .BlueOutline,
 .Blue:hover {
   /* border: 1px solid #2142b2; */
-  background-color: #ffffff;
+  /* background-color: #ffffff;
   color: #2142b2;
-}
+}  */
 
 .Black,
 .BlackOutline:hover {
@@ -66,7 +160,7 @@
   color: #242a3d;
 }
 
-.Bright {
+/* .Bright {
   background-color: #2ed9ff;
   color: #2142b2;
-}
+} */

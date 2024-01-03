@@ -7,6 +7,13 @@
   border-radius: 2px;
   margin-bottom: 16px;
   text-align: center;
+  box-shadow: inset 0px 0px 62px -20px #00fa4b;
+}
+
+
+.Post:hover {
+  box-shadow: inset 0px 0px 62px -20px #8224e5;
+  border: 2px solid orange;
 }
 
 .Post figure,
@@ -24,4 +31,8 @@ h5 {
 
 .HeartOutline:hover {
   color: #f85032;
+}
+
+.PostHover {
+  background:  red;
 }

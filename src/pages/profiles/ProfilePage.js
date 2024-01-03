@@ -25,7 +25,6 @@ import { fetchMoreData } from "../../utils/utils";
 import Post from "../posts/Post";
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
-
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
@@ -36,7 +35,7 @@ function ProfilePage() {
   // after 102
   // 108 profile.js
   // 107 add handleUnfollow and below
-  const {setProfileData, handleFollow, handleUnfollow} = useSetProfileData();
+  const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
   //   Now that we’ve written our API request, let’s start rendering our data in the browser. To access
   // the pageProfile data, we’ll destructure it when we call and auto-import the useProfileData hook.
   const { pageProfile } = useProfileData();
@@ -76,59 +75,61 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-    {/* 112 create  UsernameForm.js in profiles */}
-    {/* 111 */}
-    {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
-    {/* /111 */}
-      <Row noGutters className="px-3 text-center">
-        <Col lg={3} className="text-lg-left">
-          <Image
-            className={styles.ProfileImage}
-            roundedCircle
-            src={profile?.image}
-          />
-        </Col>
-        <Col lg={6}>
-          <h3 className="m-2">{profile?.owner}</h3>
-          <Row className="justify-content-center no-gutters">
-            <Col xs={3} className="my-2">
-              <div>{profile?.posts_count}</div>
-              <div>posts</div>
-            </Col>
-            <Col xs={3} className="my-2">
-              <div>{profile?.followers_count}</div>
-              <div>followers</div>
-            </Col>
-            <Col xs={3} className="my-2">
-              <div>{profile?.following_count}</div>
-              <div>following</div>
+      {/* 112 create  UsernameForm.js in profiles */}
+      {/* 111 */}
+      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
+      {/* /111 */}
+      <Row noGutters className="justify-content-center">
+        <Col className={styles.Card}>
+          <Col className={styles.Front}>
+            <Image
+              className={styles.ProfileImage}
+              roundedCircle
+              src={profile?.image}
+            />
+            <h3 className="m-2">{profile?.owner}</h3>
+            <div className={styles.ProfileInfoFront}>
+              <div>
+                <p>posts</p>
+                <p>followers</p>
+                <p>following</p>
+              </div>
+
+              <div>
+                <p>{profile?.posts_count}</p>
+                <p>{profile?.followers_count}</p>
+                <p>{profile?.following_count}</p>
+              </div>
+            </div>
+          </Col>
+          <Row className={styles.Back}>
+            {profile?.content && <Col className={styles.Content}>{profile.content}</Col>}
+
+            <Col className={styles.ProfileButton}>
+              {currentUser &&
+                !is_owner &&
+                (profile?.following_id ? (
+                  <Button
+                    className={`${btnStyles.Button} ${btnStyles.Unfollow}`}
+                    // Let’s now go to the follow button and call the handleFollow function with the profile in the onClick attribute.
+                    // 107 before =>  empty function => onClick={() => {}}
+                    onClick={() => handleUnfollow(profile)}
+                  >
+                    unfollow
+                  </Button>
+                ) : (
+                  <Button
+                    className={`${btnStyles.Button} ${btnStyles.Follow}`}
+                    // // Let’s now go to the follow button and call the handleFollow function with the profile in the onClick attribute.
+                    // 102 before =>  empty function => onClick={() => {}}
+                    onClick={() => handleFollow(profile)}
+                  >
+                    follow
+                  </Button>
+                ))}
             </Col>
           </Row>
         </Col>
-        <Col lg={3} className="text-lg-right">
-          {currentUser &&
-            !is_owner &&
-            (profile?.following_id ? (
-              <Button
-                className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-                // Let’s now go to the follow button and call the handleFollow function with the profile in the onClick attribute.
-                // 107 before =>  empty function => onClick={() => {}} 
-                onClick={() => handleUnfollow(profile)}
-              >
-                unfollow
-              </Button>
-            ) : (
-              <Button
-                className={`${btnStyles.Button} ${btnStyles.Black}`}
-                // // Let’s now go to the follow button and call the handleFollow function with the profile in the onClick attribute.
-                // 102 before =>  empty function => onClick={() => {}} 
-                onClick={() => handleFollow(profile)}
-              >
-                follow
-              </Button>
-            ))}
-        </Col>
-        {profile?.content && <Col className="p-3">{profile.content}</Col>}
       </Row>
     </>
   );

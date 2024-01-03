@@ -38,6 +38,8 @@ function PostPage() {
   const currentUser = useCurrentUser();
   const profile_image = currentUser?.profile_image;
   const [comments, setComments] = useState({ results: [] });
+
+  
   // /84
 
   useEffect(() => {
@@ -73,6 +75,7 @@ function PostPage() {
         // Under setPost, we’ll call the setComments  function so that the state can be updated
         // and comments can be displayed to our users.
         setComments(comments);
+        
       } catch (err) {
         console.log(err);
       }

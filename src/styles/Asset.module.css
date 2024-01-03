@@ -1,7 +1,16 @@
 .Asset {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
 }
+
+.Spinner {
+    box-shadow: 
+    0px 0px 48px 4px #00fa4b,
+    0px 0px 48px 8px #8224e5;
+
+}
+  
+

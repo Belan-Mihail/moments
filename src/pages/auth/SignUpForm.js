@@ -135,8 +135,8 @@ it a yellow color. And we’ll add a key set to index.  Inside our alert, we’l
             ))}
 
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
-              variant="primary"
+              className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.SignButton}`}
+              
               type="submit"
             >
               Sign Up

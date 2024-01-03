@@ -131,7 +131,7 @@ function PostsPage({ message, filter = "" }) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             type="text"
-            className="mr-sm-2"
+            className={`mr-sm-2 ${styles.SearchInput}`}
             placeholder="Search posts"
           />
         </Form>

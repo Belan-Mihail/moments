@@ -154,7 +154,7 @@ useRedirect("loggedOut");
       {/* /62 */}
 
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        className={`${btnStyles.Button} ${btnStyles.Main}`}
         // 61 and below
         //         Finally, let’s wire up our cancel  button to take our user back to the
         // previous page in their browser history. On our cancel button we’ll add an onClick
@@ -165,7 +165,7 @@ useRedirect("loggedOut");
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Main}`} type="submit">
         create
       </Button>
     </div>

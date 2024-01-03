@@ -6,7 +6,10 @@
     max-width: 50%;
     padding: 0px;
   }
-  
+
+  .DropdownItem:active {
+    background: #8224e5 !important;
+  }
   .Absolute {
     position: absolute;
     right: 0;

@@ -43,6 +43,11 @@ i:hover {
 
 /* 31 create pages and inside auth folder and SignUpForm.js */
 /* 30 */
+
+* {
+  transition: all ease-in-out 0.3s;
+}
+
 .App {
   font-family: "DM Sans", sans-serif;
   background-color: #f8f8f8;
@@ -58,6 +63,11 @@ i:hover {
   padding: 10px;
   border-radius: 2px;
   border: 1px solid #dadadf;
+  box-shadow: inset 0px 0px 62px -20px #00fa4b;
+}
+
+.Content:hover {
+  box-shadow: inset 0px 0px 62px -20px #8224e5;
 }
 
 .FillerImage {
@@ -77,16 +87,20 @@ i:hover {
 }
 
 a {
-  color: #555555;
+  color: #363636;
   transition: color ease-in-out 0.3s;
 }
 
 a:hover {
   text-decoration: none;
+  color: #f78215;
 }
 
+/* #8224e5 
+#f78215 - orange*/
+
 a:hover i {
-  color: #2142b2;
+  color: #f78215;
   transition: color ease-in-out 0.3s;
 }
 
@@ -95,7 +109,7 @@ input[type="file"] {
 }
 
 i {
-  color: #cfced3;
+  color: #363636;
   font-size: 1.6rem;
   padding: 7px;
   vertical-align: middle;
@@ -104,7 +118,7 @@ i {
 i:hover {
   cursor: pointer;
   transition: color ease-in-out 0.3s;
-  color: #2142b2;
+  
 }
 
 figure {

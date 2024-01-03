@@ -3,6 +3,11 @@
 .NavBar {
   background: #ffffff;
   border: 1px solid #dadadf;
+  box-shadow: inset 0px 0px 62px -20px #00fa4b;
+}
+
+.NavBar:hover {
+  box-shadow: inset 0px 0px 62px -20px #8224e5;
 }
 
 /* 23 navbar.js add classname to links */
@@ -12,5 +17,24 @@
 }
 
 .Active i {
-  color: #2142b2;
+  color: #8224e5;
 }
+
+.Logo {
+  font-size: 2rem;
+  
+  font-weight: bold;
+}
+
+.LogoOrangeText {
+  color: #f78215;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.LogoVioletText {
+  color: #8224e5;
+  font-size: 2rem;
+  font-weight: bold;
+}
+

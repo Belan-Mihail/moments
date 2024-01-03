@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import logo from "../assets/logo.png";
+
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
 import { useCurrentUser } from "../context/CurrentUserContext";
@@ -10,6 +10,10 @@ import { useSetCurrentUser } from "../context/CurrentUserContext";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
+import useHover from "../hooks/useHover";
+
+
+
 
 // create context folder in src and CurrentUserContext.js - 40
 // 39
@@ -21,6 +25,9 @@ const NavBar = () => {
   // 45 axios default
   // 44
   const currentUser = useCurrentUser();
+  const [hoverRef, isHovered] = useHover();
+  
+
 
   // clickable burger menu
   // 51 and below
@@ -61,6 +68,7 @@ const NavBar = () => {
 
   // 50
   const setCurrentUser = useSetCurrentUser();
+  
   // 50
   const handleSignOut = async (event) => {
     event.preventDefault();
@@ -118,7 +126,10 @@ const NavBar = () => {
         to={`/profiles/${currentUser?.profile_id}`}
       >
         {/* src, text and height = props for avatar component */}
-        <Avatar src={currentUser?.profile_image} text={currentUser?.username} height={40} />
+        
+
+        <Avatar src={currentUser?.profile_image} text={currentUser?.username} height={40} content='null'/>
+        
       </NavLink>
     </>
   );
@@ -146,14 +157,21 @@ const NavBar = () => {
     // Ok, now we have to specify whether we’d  like the burger menu to be expanded.  
 // We’ll do so by setting react  bootstrap Navbar expanded prop  
 // to the expanded value that is  coming from the useState hook.
-    <Navbar expanded={expanded} className={styles.NavBar} expand="md" fixed="top">
+  
+    <Navbar expanded={expanded} className={styles.NavBar} expand="md" fixed="top" ref={hoverRef}>
+      
       <Container>
         <NavLink to="/">
-          <Navbar.Brand>
-            <img src={logo} alt="logo" height="45" />
+          <Navbar.Brand >
+          {isHovered ? (
+          <span className={styles.LogoOrangeText}>Pain Pictures</span>
+          ) : (
+          <span className={styles.LogoVioletText}>Pain Pictures</span>
+          )}
+          
           </Navbar.Brand>
         </NavLink>
-
+      
         {/* 47 */}
         {currentUser && addPostIcon}
         {/* 51 onClick={() => setExpanded(!expanded)} */}
@@ -179,6 +197,7 @@ const NavBar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+  
   );
 };
 
