@@ -70,6 +70,8 @@
 
   .Follow {
     background: #8224e5;
+    position: relative;
+    overflow: hidden;
     
 }
 
@@ -81,8 +83,44 @@
     border: 2px solid #f78215;
   }
 
+  /* .Follow {
+    text-decoration: none;
+    border: 1px solid #8224e5;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .Follow:hover {
+    box-shadow: 1px 1px 25px 10px #f78215;
+  } */
+
+  .Follow::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      #f782156e,
+      transparent,
+      transparent
+    );
+    transition: all 750ms;
+    
+  }
+
+  .Follow:hover:before {
+    left: 100%;
+  }
+
   .Unfollow {
     background: #f78215;
+    position: relative;
+    overflow: hidden;
+
     
     
 }
@@ -94,6 +132,32 @@
   background: #f78215 !important;
   border: 2px solid #8224e5;
   }
+
+  .Unfollow::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      #8124e573,
+      transparent,
+      transparent
+    );
+    transition: all 750ms;
+    
+  }
+
+  .Unfollow:hover:before {
+    left: 100%;
+  }
+
+
+
+
 
 /* .Main:active, .Main:focus {
   border-color: inherit;

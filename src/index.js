@@ -5,7 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { CurrentUserProvider } from "./context/CurrentUserContext";
-import { ProfileDataProvider } from "./context/ProfileDataContext"
+import { ProfileDataProvider } from "./context/ProfileDataContext";
+import { TurquoiseModeProvider } from "./context/TurquoiseModeContext";
 
 // 125 install npm install jwt-decode and go to utils.js
 // before 124
@@ -30,17 +31,19 @@ import { ProfileDataProvider } from "./context/ProfileDataContext"
 
 // after 124
 ReactDOM.render(
-    <Router>
-      {/* 43 SiginForm.js */}
-      {/* 42 and import */}
-      <CurrentUserProvider>
-        {/* 98 PopularProfiles */}
-        {/* 98 ProfileDataProvider */}
-        <ProfileDataProvider>
+  <Router>
+    {/* 43 SiginForm.js */}
+    {/* 42 and import */}
+    <CurrentUserProvider>
+      {/* 98 PopularProfiles */}
+      {/* 98 ProfileDataProvider */}
+      <ProfileDataProvider>
+        <TurquoiseModeProvider>
           <App />
-        </ProfileDataProvider>
-      </CurrentUserProvider>
-    </Router>,
+        </TurquoiseModeProvider>
+      </ProfileDataProvider>
+    </CurrentUserProvider>
+  </Router>,
   document.getElementById("root")
 );
 

@@ -96,7 +96,7 @@ const SignInForm = () => {
 
   return (
     <Row className={styles.Row}>
-      <Col className="my-auto p-0 p-md-2" md={6}>
+      <Col className="my-auto p-0 p-md-2" md={6} data-aos="fade-right" data-aos-duration="2000">
         <Container className={`${appStyles.Content} p-4 `}>
           <h1 className={styles.Header}>sign in</h1>
 
@@ -157,6 +157,7 @@ const SignInForm = () => {
       <Col
         md={6}
         className={`my-auto d-none d-md-block p-2 ${styles.SignInCol}`}
+        data-aos="fade-left" data-aos-duration="2000"
       >
         <Image
           className={`${appStyles.FillerImage}`}

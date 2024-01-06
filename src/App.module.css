@@ -44,6 +44,7 @@ i:hover {
 /* 31 create pages and inside auth folder and SignUpForm.js */
 /* 30 */
 
+
 * {
   transition: all ease-in-out 0.3s;
 }
@@ -52,6 +53,18 @@ i:hover {
   font-family: "DM Sans", sans-serif;
   background-color: #f8f8f8;
   min-height: 100vh;
+}
+
+.AppLight {
+  background-color: #f8f8f8;
+}
+
+.AppTurquoise {
+  background-color: #4eff9e33;
+}
+
+.AppOrange {
+  background-color: #fa850073;
 }
 
 .Main {
@@ -64,6 +77,7 @@ i:hover {
   border-radius: 2px;
   border: 1px solid #dadadf;
   box-shadow: inset 0px 0px 62px -20px #00fa4b;
+  
 }
 
 .Content:hover {

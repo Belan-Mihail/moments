@@ -18,6 +18,15 @@ import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from "./components/NotFound.js";
+import { TurquoiseModeContext } from "./context/TurquoiseModeContext.js";
+import { useContext } from "react";
+import ModeSwitch from './components/ModeSwitch.js'
+import React, { useEffect } from "react";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+import GreetingModal from "./components/GreetingModal.js";
+
 
 // 42 index.js
 // 41
@@ -32,10 +41,26 @@ function App() {
   const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id || "";
 
+  const {TurquoiseMode} = useContext(TurquoiseModeContext)
+
+
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
+
+ 
+
   return (
-    <div className={styles.App}>
+    // <div className={TurquoiseMode ? (`${styles.App} ${styles.AppTurquoise}`) : (`${styles.App} ${styles.AppLight}`)}>
+    <div className={TurquoiseMode === 'orange' ? (`${styles.App} ${styles.AppOrange}`) : (TurquoiseMode === 'turquoise') ? (`${styles.App} ${styles.AppTurquoise}`) : (`${styles.App} ${styles.AppLight}`)}>
+      
       <NavBar />
+      
       <Container className={styles.Main}>
+      <ModeSwitch />
+      <GreetingModal />
+      
         <Switch>
           {/* 72 before */}
           {/* <Route exact path="/" render={() => <h1>Home page</h1>} /> */}

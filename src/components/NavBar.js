@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 
 import styles from "../styles/NavBar.module.css";
@@ -11,8 +11,8 @@ import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
 import useHover from "../hooks/useHover";
-
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 
 // create context folder in src and CurrentUserContext.js - 40
@@ -152,6 +152,11 @@ const NavBar = () => {
     </>
   );
 
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
+
   return (
     // 51 add expanded={expanded} and below
     // Ok, now we have to specify whether we’d  like the burger menu to be expanded.  
@@ -162,7 +167,7 @@ const NavBar = () => {
       
       <Container>
         <NavLink to="/">
-          <Navbar.Brand >
+          <Navbar.Brand data-aos="fade-down">
           {isHovered ? (
           <span className={styles.LogoOrangeText}>Pain Pictures</span>
           ) : (
@@ -170,7 +175,7 @@ const NavBar = () => {
           )}
           
           </Navbar.Brand>
-        </NavLink>
+        </NavLink >
       
         {/* 47 */}
         {currentUser && addPostIcon}
@@ -181,7 +186,7 @@ const NavBar = () => {
         onClick={() => setExpanded(!expanded)} 
         aria-controls="basic-navbar-nav" 
         />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" data-aos="fade-down">
           <Nav className="ml-auto text-left">
             <NavLink
               exact

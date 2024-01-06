@@ -70,7 +70,7 @@ const handleChange = (event) => {
 
   return (
     <Row className={styles.Row}>
-      <Col className="my-auto py-2 p-md-2" md={6}>
+      <Col className="my-auto py-2 p-md-2" md={6} data-aos="fade-right" data-aos-duration="2000">
         <Container className={`${appStyles.Content} p-4 `}>
           <h1 className={styles.Header}>sign up</h1>
 
@@ -159,6 +159,7 @@ the passwords don’t match. So under the submit  button, I’ll add the Alerts 
       <Col
         md={6}
         className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
+        data-aos="fade-left" data-aos-duration="2000"
       >
         <Image
           className={`${appStyles.FillerImage}`}

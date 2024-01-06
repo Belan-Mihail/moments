@@ -81,7 +81,7 @@ function ProfilePage() {
       {/* /111 */}
       <Row noGutters className="justify-content-center">
         <Col className={styles.Card}>
-          <Col className={styles.Front}>
+          <Col className={styles.Front} data-aos="zoom-in" data-aos-duration="1000">
             <Image
               className={styles.ProfileImage}
               roundedCircle
@@ -160,7 +160,7 @@ function ProfilePage() {
 
   return (
     <Row>
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
+      <Col className="py-2 p-0 p-lg-2" lg={8} data-aos="fade-right" data-aos-duration="1000">
         <PopularProfiles mobile />
         <Container className={appStyles.Content}>
           {hasLoaded ? (
@@ -173,7 +173,7 @@ function ProfilePage() {
           )}
         </Container>
       </Col>
-      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
+      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2" data-aos="fade-left" data-aos-duration="1000">
         <PopularProfiles />
       </Col>
     </Row>
