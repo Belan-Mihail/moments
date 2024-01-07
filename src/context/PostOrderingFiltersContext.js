@@ -1,27 +1,27 @@
 
 import React, {useState, createContext } from 'react'
 
-const TurquoiseModeContext = createContext()
+const PostOrderingFilterContext = createContext()
 
-function TurquoiseModeProvider({ children }) {
+function PostOrderingFilterProvider({ children }) {
 
     // const [TurquoiseMode, setTurquoiseMode] = useState(false)
     // const ToggleTurquoiseMode = () => {
     //     setTurquoiseMode(!TurquoiseMode)
     // }
-    const [TurquoiseMode, setTurquoiseMode] = useState('ligth')
+    const [PostOrderingFilter, setPostOrderingFilter] = useState('')
     
     
 
     return (
         // <TurquoiseModeContext.Provider value={{TurquoiseMode, ToggleTurquoiseMode}}>
-        <TurquoiseModeContext.Provider value={{TurquoiseMode, setTurquoiseMode}}>
+        <PostOrderingFilterContext.Provider value={{PostOrderingFilter, setPostOrderingFilter}}>
           
             {children}
           
-        </TurquoiseModeContext.Provider>
+        </PostOrderingFilterContext.Provider>
       );
 
 }
 
-export {TurquoiseModeContext, TurquoiseModeProvider}
+export {PostOrderingFilterContext, PostOrderingFilterProvider}

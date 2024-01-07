@@ -1,7 +1,7 @@
 // 72 app.js
 // 71
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -19,6 +19,7 @@ import { fetchMoreData } from "../../utils/utils";
 import InfiniteScroll from "react-infinite-scroll-component";
 import PopularProfiles from "../profiles/PopularProfiles";
 import { useCurrentUser } from "../../context/CurrentUserContext";
+import { PostOrderingFilterContext } from "../../context/PostOrderingFiltersContext";
 
 // 71
 // function PostsPage() {
@@ -68,6 +69,9 @@ function PostsPage({ message, filter = "" }) {
   const [query, setQuery] = useState("");
   // /74
 
+  const { PostOrderingFilter } =
+    useContext(PostOrderingFilterContext);
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -76,7 +80,7 @@ function PostsPage({ message, filter = "" }) {
         // before 74
         // const { data } = await axiosReq.get(`/posts/?${filter}`);
         // after 74
-        const { data } = await axiosReq.get(`/posts/?${filter}search=${query}`);
+        const { data } = await axiosReq.get(`/posts/?${filter}search=${query}&ordering=${PostOrderingFilter}`);
         setPosts(data);
         // We’ll also set the hasLoaded variable to true,  so that the Spinner is no longer displayed.
         setHasLoaded(true);
@@ -109,7 +113,7 @@ function PostsPage({ message, filter = "" }) {
     // after 74
   // }, [filter, query, pathname]);
   // after 132
-  }, [filter, query, pathname, currentUser]);
+  }, [filter, query, pathname, currentUser, PostOrderingFilter]);
 
   return (
     <Row className="h-100">

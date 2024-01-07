@@ -26,6 +26,7 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import GreetingModal from "./components/GreetingModal.js";
+import PostOrderingFilter from "./components/PostOrderingFilter.js";
 
 
 // 42 index.js
@@ -59,6 +60,7 @@ function App() {
       
       <Container className={styles.Main}>
       <ModeSwitch />
+      <PostOrderingFilter />
       <GreetingModal />
       
         <Switch>

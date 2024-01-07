@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { CurrentUserProvider } from "./context/CurrentUserContext";
 import { ProfileDataProvider } from "./context/ProfileDataContext";
 import { TurquoiseModeProvider } from "./context/TurquoiseModeContext";
+import { PostOrderingFilterProvider } from "./context/PostOrderingFiltersContext";
 
 // 125 install npm install jwt-decode and go to utils.js
 // before 124
@@ -39,7 +40,9 @@ ReactDOM.render(
       {/* 98 ProfileDataProvider */}
       <ProfileDataProvider>
         <TurquoiseModeProvider>
-          <App />
+          <PostOrderingFilterProvider>
+            <App />
+          </PostOrderingFilterProvider>
         </TurquoiseModeProvider>
       </ProfileDataProvider>
     </CurrentUserProvider>
