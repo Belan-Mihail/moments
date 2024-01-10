@@ -19,7 +19,7 @@ const Profile = (props) => {
   const { profile, mobile, imageSize = 55 } = props;
   // Next we need to access the data within the profile  object, so we’ll destructure the id, following_id,
   // image and owner variables from it.
-  const { id, following_id, image, owner, content } = profile;
+  const { id, following_id, image, owner, greeting } = profile;
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
@@ -41,7 +41,7 @@ const Profile = (props) => {
         {/* And we’ll set its  
 “to” prop to link to the user’s profile page by  including the profile id in the template string */}
         <Link className="align-self-center" to={`/profiles/${id}`}>
-          <Avatar src={image} height={imageSize} content={content} />
+          <Avatar src={image} height={imageSize} greeting={greeting} />
         </Link>
       
       <div className={`mx-2 ${styles.WordBreak}`}>

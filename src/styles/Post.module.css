@@ -37,3 +37,18 @@ h5 {
 .PostHover {
   background:  red;
 }
+
+.CardBody {
+  position: relative;
+}
+
+.Category {
+  position: absolute;
+  bottom: 25%;
+  left: 0;
+  padding: .5rem 2rem;
+  
+  opacity: .9;
+  color: #fff;
+
+}

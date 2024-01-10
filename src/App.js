@@ -27,6 +27,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import GreetingModal from "./components/GreetingModal.js";
 import PostOrderingFilter from "./components/PostOrderingFilter.js";
+// import PostCategoryFilter from "./components/PostCategoryFilter.js";
+// import { PostCategoryFilterContext } from "./context/PostCategoryFiltersContext.js";
 
 
 // 42 index.js
@@ -43,6 +45,8 @@ function App() {
   const profile_id = currentUser?.profile_id || "";
 
   const {TurquoiseMode} = useContext(TurquoiseModeContext)
+  // const {PostCategoryFilters } =
+  //   useContext(PostCategoryFilterContext);
 
 
   useEffect(() => {
@@ -61,6 +65,7 @@ function App() {
       <Container className={styles.Main}>
       <ModeSwitch />
       <PostOrderingFilter />
+      {/* <PostCategoryFilter /> */}
       <GreetingModal />
       
         <Switch>
@@ -72,6 +77,41 @@ function App() {
             path="/"
             render={() => (
               <PostsPage message="No results found. Adjust the search keyword." />
+            )}
+          />
+          <Route
+            exact
+            path="/category/landscapes"
+            render={() => (
+              <PostsPage filter={`post_category=landscapes&`} />
+            )}
+          />
+           <Route
+            exact
+            path="/category/animals"
+            render={() => (
+              <PostsPage filter={`post_category=animals&`} />
+            )}
+          />
+          <Route
+            exact
+            path="/category/plants"
+            render={() => (
+              <PostsPage filter={`post_category=plants&`} />
+            )}
+          />
+          <Route
+            exact
+            path="/category/abstraction"
+            render={() => (
+              <PostsPage filter={`post_category=abstraction&`} />
+            )}
+          />
+          <Route
+            exact
+            path="/category/other"
+            render={() => (
+              <PostsPage filter={`post_category=other&`} />
             )}
           />
           <Route

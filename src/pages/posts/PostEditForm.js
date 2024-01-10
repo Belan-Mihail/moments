@@ -25,9 +25,10 @@ function PostEditForm() {
     title: "",
     content: "",
     image: "",
+    post_category: "",
   });
 
-  const { title, content, image } = postData;
+  const { title, content, image, post_category } = postData;
 
   //   In this video, we’ll take care of  sending our form data to our API.
   // To do this, we need to create a  reference to our Form.File component
@@ -53,7 +54,7 @@ function PostEditForm() {
         const { data } = await axiosReq.get(`/posts/${id}/`);
         //         Assuming there are no errors, we can destructure  the data we received back from the API, so we’ll
         // get the post title, content, image and a value for  if the logged in user is the owner of the post.
-        const { title, content, image, is_owner } = data;
+        const { title, content, image, is_owner, post_category } = data;
 
         //         However, a better user experience, and a more  secure looking website, would only allow the post
         // owner to access the edit post page in the first  place, and would redirect any other users away.
@@ -62,7 +63,7 @@ function PostEditForm() {
         // the input fields can be populated on mount.
         // In the second part of our ternary, if the
         // user isn’t the post owner, we’ll send them  back to the home page of our website instead.
-        is_owner ? setPostData({ title, content, image }) : history.push("/");
+        is_owner ? setPostData({ title, content, image, post_category }) : history.push("/");
       } catch (err) {
         console.log(err);
       }
@@ -106,6 +107,7 @@ function PostEditForm() {
 
     formData.append("title", title);
     formData.append("content", content);
+    formData.append("post_category", post_category);
 //     We are using the state to display  our image preview to the user,  
 // so our file input element won't have a file  in it unless our user uploads a new image.
 // So we first need to check if the imageInput  element has a file in it, before we try to  
@@ -158,6 +160,29 @@ function PostEditForm() {
         />
       </Form.Group>
       {errors.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+<Form.Group controlId="post_category">
+        <Form.Label>Category</Form.Label>
+        <Form.Control
+          as="select"
+          name="post_category"
+          value={post_category}
+          onChange={handleChange}
+        >
+          <option>landscapes</option>
+          <option>animals</option>
+          <option>plants</option>
+          <option>abstraction</option>
+          <option>other</option>
+          
+        </Form.Control>
+
+      </Form.Group>
+      {errors?.post_category?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>

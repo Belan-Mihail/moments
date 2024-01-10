@@ -8,6 +8,7 @@ import { CurrentUserProvider } from "./context/CurrentUserContext";
 import { ProfileDataProvider } from "./context/ProfileDataContext";
 import { TurquoiseModeProvider } from "./context/TurquoiseModeContext";
 import { PostOrderingFilterProvider } from "./context/PostOrderingFiltersContext";
+// import { PostCategoryFilterProvider } from "./context/PostCategoryFiltersContext";
 
 // 125 install npm install jwt-decode and go to utils.js
 // before 124
@@ -41,7 +42,9 @@ ReactDOM.render(
       <ProfileDataProvider>
         <TurquoiseModeProvider>
           <PostOrderingFilterProvider>
-            <App />
+            {/* <PostCategoryFilterProvider> */}
+              <App />
+            {/* </PostCategoryFilterProvider> */}
           </PostOrderingFilterProvider>
         </TurquoiseModeProvider>
       </ProfileDataProvider>

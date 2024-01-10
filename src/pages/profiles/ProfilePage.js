@@ -103,6 +103,7 @@ function ProfilePage() {
             </div>
           </Col>
           <Row className={styles.Back}>
+            <span className="text-center m-2">Bio</span>
             {profile?.content && <Col className={styles.Content}>{profile.content}</Col>}
 
             <Col className={styles.ProfileButton}>

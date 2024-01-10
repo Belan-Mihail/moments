@@ -13,6 +13,7 @@ import { removeTokenTimestamp } from "../utils/utils";
 import useHover from "../hooks/useHover";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 
 // create context folder in src and CurrentUserContext.js - 40
@@ -97,6 +98,22 @@ const NavBar = () => {
       <i className="far fa-plus-square"></i>Add post
     </NavLink>
   );
+  const selectCategory = (
+    <Dropdown>
+      <Dropdown.Toggle className={styles.DropdownButton} id="dropdown-basic">
+        Categories
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item href="/category/landscapes">landscapes</Dropdown.Item>
+        <Dropdown.Item href="/category/animals">animals</Dropdown.Item>
+        <Dropdown.Item href="/category/plants">plants</Dropdown.Item>
+        <Dropdown.Item href="/category/abstraction">abstraction</Dropdown.Item>
+        <Dropdown.Item href="/category/other">other</Dropdown.Item>
+        <Dropdown.Item href="/">all</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  )
   // before 47
   // const loggedInIcons = <>{currentUser?.username}</>;
   // after 47 and below
@@ -128,7 +145,7 @@ const NavBar = () => {
         {/* src, text and height = props for avatar component */}
         
 
-        <Avatar src={currentUser?.profile_image} text={currentUser?.username} height={40} content='null'/>
+        <Avatar src={currentUser?.profile_image} text={currentUser?.username} height={40} greeting='null'/>
         
       </NavLink>
     </>
@@ -179,6 +196,7 @@ const NavBar = () => {
       
         {/* 47 */}
         {currentUser && addPostIcon}
+        {selectCategory}
         {/* 51 onClick={() => setExpanded(!expanded)} */}
         <Navbar.Toggle 
         // 52

@@ -34,9 +34,10 @@ useRedirect("loggedOut");
     title: "",
     content: "",
     image: "",
+    post_category: "",
   });
 
-  const { title, content, image } = postData;
+  const { title, content, image, post_category } = postData;
 
   //   61 and below
   //   In this video, we’ll take care of  sending our form data to our API.
@@ -88,6 +89,7 @@ useRedirect("loggedOut");
 
     formData.append("title", title);
     formData.append("content", content);
+    formData.append("post_category", post_category);
     //     To send our image file, we’ll need to  access the referenced imageInput component,
     // and reach in to get the first file in  the current attributes files array.
     formData.append("image", imageInput.current.files[0]);
@@ -152,6 +154,29 @@ useRedirect("loggedOut");
         </Alert>
       ))}
       {/* /62 */}
+
+      <Form.Group controlId="post_category">
+        <Form.Label>Category</Form.Label>
+        <Form.Control
+          as="select"
+          name="post_category"
+          value={post_category}
+          onChange={handleChange}
+        >
+          <option>landscapes</option>
+          <option>animals</option>
+          <option>plants</option>
+          <option>abstraction</option>
+          <option>other</option>
+          
+        </Form.Control>
+
+      </Form.Group>
+      {errors?.post_category?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Main}`}
